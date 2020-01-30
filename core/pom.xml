@@ -9,11 +9,27 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>core</artifactId>
+    <artifactId>java-nix-core</artifactId>
 
     <properties>
         <junit.version>5.6.0</junit.version>
+        <maven.test.plugins.version>3.0.0-M4</maven.test.plugins.version>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.test.plugins.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven.test.plugins.version}</version>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <dependency>
