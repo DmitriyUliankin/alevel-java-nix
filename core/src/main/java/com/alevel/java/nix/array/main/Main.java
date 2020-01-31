@@ -6,6 +6,10 @@ import com.alevel.java.nix.array.printer.Printer;
 import com.alevel.java.nix.array.sort.BubbleSort;
 
 public class Main {
+
+    private static FindExtrem findE;
+    private static BubbleSort bubbleS;
+
     public static void main(String[] args) {
 
         int[] arr = {8, 5, 1, 0, -4, 16, -9, -15, 7, 11, -10, 0};
@@ -13,10 +17,10 @@ public class Main {
         Printer.print(arr);
 
         System.out.println();
-        System.out.println("Min value: " + FindExtrem.findMin(arr));
-        System.out.println("Max value: " + FindExtrem.findMax(arr));
+        System.out.println("Min value: " + findE.findMin(arr));
+        System.out.println("Max value: " + findE.findMax(arr));
 
-        BubbleSort.bubbleSort(arr);
+        bubbleS.bubbleSort(arr);
         Printer.print(arr);
 
         System.out.println();
