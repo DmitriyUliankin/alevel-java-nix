@@ -9,6 +9,7 @@ public class Main {
 
     private static FindExtrem findE;
     private static BubbleSort bubbleS;
+    private static FindNum findN;
 
     public static void main(String[] args) {
 
@@ -25,6 +26,6 @@ public class Main {
 
         System.out.println();
 
-        FindNum.findNum(arr);
+        findN.findNum(arr);
     }
 }

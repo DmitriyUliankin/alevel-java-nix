@@ -1,6 +1,7 @@
 package com.alevel.java.nix.array.extremtest;
 
 import com.alevel.java.nix.array.findelem.FindExtrem;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,6 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ExtremTest {
 
     private FindExtrem findE;
+
+    @BeforeEach
+    void setUp() {
+        findE = new FindExtrem();
+    }
 
     @Test
     public void extremTest() {

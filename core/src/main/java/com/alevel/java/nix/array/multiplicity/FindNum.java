@@ -5,7 +5,7 @@ import com.alevel.java.nix.array.printer.Printer;
 import java.util.Arrays;
 
 public class FindNum {
-    public static int[] findNum(int[] arr) {
+    public int[] findNum(int[] arr) {
 
         //int num = Scanner.getNum();
         int num = 5;
