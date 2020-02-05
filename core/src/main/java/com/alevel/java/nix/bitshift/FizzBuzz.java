@@ -5,7 +5,9 @@ import java.util.List;
 
 public class FizzBuzz {
 
-    private List<Integer> getNums(String string) {
+    private static FizzBuzz fb = new FizzBuzz();
+
+    private List<Integer> getNum(String string) {
         char[] charArray = string.toCharArray();
         List<Integer> list = new ArrayList<>();
         for (char value : charArray) {
@@ -15,9 +17,29 @@ public class FizzBuzz {
         return list;
     }
 
+    private String fizzBuzz(int num) {
+        if (num % 6 == 0) {
+            return "fizzbuzz";
+        } else if (num % 3 == 0) {
+            return "buzz";
+        } else if (num % 2 == 0) {
+            return "fizz";
+        }
+        return String.valueOf(num);
+    }
+
+    public void getFizzBuzz(int number) {
+        while (number != 0) {
+            int value = number % 10;
+            number /= 10;
+            fb.fizzBuzz(value);
+        }
+    }
+
+
     public List<Integer> digitsInNumber(int number) {
         String string = Integer.toString(number);
-        return getNums(string);
+        return getNum(string);
     }
 
     public List<Integer> digitsInNumberReverse(int number) {
@@ -27,18 +49,11 @@ public class FizzBuzz {
 
         String revValue = Integer.toString(strValue);
 
-        return getNums(revValue);
+        return getNum(revValue);
     }
 
-    public String fizzBuzz(int number) {
-
-        if (number % 6 == 0) {
-            return "fizzbuzz";
-        } else if (number % 3 == 0) {
-            return "buzz";
-        } else if (number % 2 == 0) {
-            return "fizz";
-        }
-        return String.valueOf(number);
+    public static void main(String[] args) {
+        fb.digitsInNumber(123_456);
+        fb.getFizzBuzz(123_456);
     }
 }
