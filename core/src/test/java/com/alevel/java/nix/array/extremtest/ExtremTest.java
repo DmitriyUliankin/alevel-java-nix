@@ -1,6 +1,6 @@
 package com.alevel.java.nix.array.extremtest;
 
-import com.alevel.java.nix.array.findelem.FindExtrem;
+import com.alevel.java.nix.array.findextrem.FindExtrem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
