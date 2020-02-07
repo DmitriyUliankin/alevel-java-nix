@@ -1,4 +1,4 @@
-package com.alevel.java.nix.array.findextrem;
+package com.alevel.java.nix.array.finder.findextrem;
 
 import java.util.Arrays;
 
