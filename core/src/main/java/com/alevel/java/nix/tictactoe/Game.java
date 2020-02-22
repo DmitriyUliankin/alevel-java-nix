@@ -1,4 +1,4 @@
-package com.alevel.java.nix.tic_tac_toe;
+package com.alevel.java.nix.tictactoe;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

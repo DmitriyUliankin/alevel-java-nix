@@ -14,7 +14,7 @@
         </layout>
     </appender>
 
-    <logger name="com.alevel.java.nix.tic_tac_toe" level="info">
+    <logger name="com.alevel.java.nix.tictactoe" level="info">
         <appenderRef ref="file"/>
     </logger>
 

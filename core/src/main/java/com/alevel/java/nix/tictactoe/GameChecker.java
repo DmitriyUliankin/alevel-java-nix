@@ -1,4 +1,4 @@
-package com.alevel.java.nix.tic_tac_toe;
+package com.alevel.java.nix.tictactoe;
 
 public class GameChecker implements IsGameOver {
     public boolean isGameOver(int n) {
