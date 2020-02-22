@@ -3,4 +3,4 @@
 *.iml
 # Maven
 target/
-core/src/main/resources/
+tic-tac-toe.txt

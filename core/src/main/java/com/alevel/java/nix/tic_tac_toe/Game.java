@@ -1,10 +1,16 @@
 package com.alevel.java.nix.tic_tac_toe;
 
-import java.io.File;
-import java.io.FileWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Game {
+
+    private static final Logger log = LoggerFactory.getLogger(Game.class);
+    private static final String FILENAME = "tic-tac-toe.txt";
 
     public static int[] canvas = {
             0, 0, 0,
@@ -12,16 +18,11 @@ public class Game {
             0, 0, 0
     };
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         var viewer = new Viewer();
         var gameChecker = new GameChecker();
         var field = new Field();
-        var loggerProcess = new LoggerProcess();
-
-        File file = new File("/Users/mcmisle/Documents/A-Level/Maven/core/src/main/resources/tic-tac-toe.txt");
-        FileWriter fileWriter = new FileWriter(file);
-
         boolean b;
         var isCurrentX = false;
         do {
@@ -36,12 +37,14 @@ public class Game {
                 return;
             }
 
-            fileWriter.write(String.valueOf(loggerProcess.isDraw())+", ");
+            log.info("next step");
+            try {
+                Files.readAllBytes(Paths.get(FILENAME));
+            } catch (IOException e) {
+                log.info("Failed to read file {}.", FILENAME, e);
+            }
 
         } while (b);
-
-        fileWriter.flush();
-        fileWriter.close();
 
         viewer.drawCanvas();
         System.out.println();
