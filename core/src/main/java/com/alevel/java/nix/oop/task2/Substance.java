@@ -1,6 +1,6 @@
 package com.alevel.java.nix.oop.task2;
 
-public abstract class Substance implements Internals {
+public abstract class Substance implements SubstanceOperations {
 
     private double temperature = 20.0;
 

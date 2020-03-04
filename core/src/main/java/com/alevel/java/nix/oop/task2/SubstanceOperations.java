@@ -1,6 +1,6 @@
 package com.alevel.java.nix.oop.task2;
 
-public interface Internals {
+public interface SubstanceOperations {
 
     double getTemperature();
 
