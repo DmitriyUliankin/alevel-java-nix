@@ -1,10 +1,7 @@
 package com.alevel.java.nix.oop.task1;
 
-import java.util.List;
-
 public class ContractStudent extends Student {
 
-    private List<ContractStudent> contractStudents = null;
     private double contractPrice;
 
     public ContractStudent(String name, int age, double contractPrice) {

@@ -44,5 +44,9 @@ public class Group {
                 listContract.add(contractStudent);
             }
         }
+
+        public List<Student> getContractStudents() {
+            return Collections.unmodifiableList(listContract);
+        }
     }
 }
