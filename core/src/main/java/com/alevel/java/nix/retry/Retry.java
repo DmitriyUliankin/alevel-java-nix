@@ -1,18 +1,20 @@
 package com.alevel.java.nix.retry;
 
-public abstract class Retry implements Block {
+public abstract class Retry<T> implements Block<T> {
 
-    private final Block block;
+    private final Block<T> block;
 
     private final int times;
 
-    public Retry(int times, Block block) {
+    public Retry(int times, Block<T> block) {
         this.times = times;
         this.block = block;
     }
 
     @Override
-    public void run() throws Exception {
+    public T run() throws Exception {
+
+        T type = (T) new Object();
 
         int trying = 1;
 
@@ -26,12 +28,13 @@ public abstract class Retry implements Block {
             try {
                 block.run();
                 waiting(trying);
-                return;
+                break;
             } catch (Exception e) {
                 e.printStackTrace();
             }
             trying++;
         }
+        return type;
     }
 
     abstract void waiting(int times) throws InterruptedException;

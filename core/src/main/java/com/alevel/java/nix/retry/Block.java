@@ -1,8 +1,8 @@
 package com.alevel.java.nix.retry;
 
 @FunctionalInterface
-public interface Block {
+public interface Block<T> {
 
-    void run() throws Exception;
+    T run() throws Exception;
 
 }

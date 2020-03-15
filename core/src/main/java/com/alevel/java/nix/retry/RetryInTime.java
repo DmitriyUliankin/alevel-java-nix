@@ -1,10 +1,10 @@
 package com.alevel.java.nix.retry;
 
-public class RetryInTime extends Retry {
+public class RetryInTime<T> extends Retry<T> {
 
     private final int millis;
 
-    public RetryInTime(int times, Block block, int millis) {
+    public RetryInTime(int times, Block<T> block, int millis) {
         super(times, block);
         this.millis = millis;
     }
