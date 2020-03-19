@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class Strings {
 
-    public static void main(String[] args) {
+    public void numbersInListOfStrings() {
 
         List<String> stringList = new ArrayList<>();
         stringList.add("string 1 text");
@@ -16,8 +16,6 @@ public class Strings {
         var numbers = Integer.parseInt(stringList.stream()
                 .map(x -> x.replaceAll("[^-?0-9]+", ""))
                 .collect(Collectors.joining()));
-
-        System.out.println(numbers);
     }
 
 }
