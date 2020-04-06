@@ -1,5 +1,6 @@
 package com.alevel.java.nix.data.weekends;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,8 @@ public class GetWeekends {
                 .collect(toList());
         var weekdays = new ArrayList<Integer>();
         for (int i = 0; i < allDays.size(); i++) {
-            if (Integer.parseInt(String.valueOf(allDays.get(i).getDayOfWeek())) % 6 == 0
-                    || Integer.parseInt(String.valueOf(allDays.get(i).getDayOfWeek())) % 7 == 0) {
+            if ((allDays.get(i).getDayOfWeek() == DayOfWeek.SATURDAY)
+                    || (allDays.get(i).getDayOfWeek()) == DayOfWeek.SUNDAY) {
                 weekdays.add(i);
             }
         }
