@@ -11,6 +11,7 @@
     <modules>
         <module>core</module>
         <module>module_one</module>
+        <module>module_two</module>
     </modules>
 
     <packaging>pom</packaging>
