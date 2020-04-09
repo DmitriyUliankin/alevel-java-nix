@@ -1,7 +1,6 @@
 package task.second;
 
-import java.util.Comparator;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,16 +8,19 @@ public final class FindUniqueName {
 
     public String getUniqueElement(List<String> names) {
 
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = new LinkedHashMap<>();
 
         for (String name : names) {
-            map.put(name, 0);
+            map.putIfAbsent(name, 0);
+            map.put(name, map.get(name) + 1);
         }
 
-        return map.keySet()
+        return map.entrySet()
                 .stream()
-                .max(Comparator.naturalOrder())
-                .orElse("something went wrong");
+                .filter(x -> x.getValue() == 1)
+                .findFirst()
+                .map(Map.Entry::getKey)
+                .orElse(null);
     }
 
 }
