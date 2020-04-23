@@ -14,7 +14,7 @@ public class UseAnnotation {
     private static final Properties properties = new Properties();
 
     private static final String fileName =
-            "/Users/mcmisle/Documents/A-Level/Maven/core/src/main/java/com/alevel/java/nix/reflection/app.properties";
+            "core/src/main/java/com/alevel/java/nix/reflection/app.properties";
 
     private static Object getPropertyFromFile(Field fieldName) {
         try {
