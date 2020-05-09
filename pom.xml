@@ -15,6 +15,7 @@
         <module>database</module>
         <module>csvmapper</module>
         <module>hibernate</module>
+        <module>module_three</module>
     </modules>
 
     <packaging>pom</packaging>

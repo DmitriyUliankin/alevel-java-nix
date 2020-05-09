@@ -3,4 +3,6 @@
 *.iml
 # Maven
 target/
+# Log
 tic-tac-toe.txt
+finance-log.txt
