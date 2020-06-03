@@ -16,6 +16,7 @@
         <module>csvmapper</module>
         <module>hibernate</module>
         <module>module_three</module>
+        <module>javaee</module>
     </modules>
 
     <packaging>pom</packaging>
