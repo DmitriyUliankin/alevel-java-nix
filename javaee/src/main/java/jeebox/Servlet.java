@@ -16,6 +16,8 @@ public class Servlet extends HttpServlet {
 
     private static final Logger log = LoggerFactory.getLogger(Servlet.class);
 
+    private final ConcurrentHashMap<String, String> remotes = new ConcurrentHashMap<>();
+
     @Override
     public void init() {
         log.info("servlet initialization complete");
@@ -23,7 +25,6 @@ public class Servlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        ConcurrentHashMap<String, String> remotes = new ConcurrentHashMap<>();
         PrintWriter responseBody = resp.getWriter();
         String header = "User-Agent";
         remotes.put(req.getRemoteHost(), req.getHeader(header));
