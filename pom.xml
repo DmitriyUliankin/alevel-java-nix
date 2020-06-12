@@ -17,6 +17,7 @@
         <module>hibernate</module>
         <module>module_three</module>
         <module>javaee</module>
+        <module>message-store</module>
     </modules>
 
     <packaging>pom</packaging>
