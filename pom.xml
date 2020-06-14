@@ -18,6 +18,7 @@
         <module>module_three</module>
         <module>javaee</module>
         <module>message-store</module>
+        <module>todo-list</module>
     </modules>
 
     <packaging>pom</packaging>
