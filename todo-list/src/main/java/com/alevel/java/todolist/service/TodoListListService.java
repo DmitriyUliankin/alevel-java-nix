@@ -5,12 +5,14 @@ import com.alevel.java.todolist.entity.changereq.ChangeRequest;
 import com.alevel.java.todolist.exception.TodoNotFoundException;
 import com.alevel.java.todolist.repository.TodoListRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class TodoListListService implements TodoListOperations {
 
     private final TodoListRepository repository;
