@@ -2,6 +2,14 @@ package com.alevel.java.messagestore.entity.request;
 
 public class SaveMessageRequest {
 
+    public SaveMessageRequest() {
+    }
+
+    public SaveMessageRequest(String title, String text) {
+        this.title = title;
+        this.text = text;
+    }
+
     private String title;
 
     private String text;
