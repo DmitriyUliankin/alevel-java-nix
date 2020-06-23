@@ -1,30 +1,40 @@
 package com.alevel.java.todolist.entity;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
-@Table(name = "todo_list")
+@Table(name = "todos")
 public class TodoList {
 
     @Id
-    @GeneratedValue
-    Long id;
+    private UUID id;
 
-    @Column(name = "text", nullable = false)
-    String text;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private User user;
 
-    @Column(name = "is_done", nullable = false)
-    Boolean status;
+    @Column(nullable = false)
+    private String text;
 
-    public TodoList() {
-    }
+    @Column
+    @Enumerated(EnumType.STRING)
+    private TodoStatus status;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getText() {
@@ -35,11 +45,11 @@ public class TodoList {
         this.text = text;
     }
 
-    public Boolean getStatus() {
+    public TodoStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(TodoStatus status) {
         this.status = status;
     }
 

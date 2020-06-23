@@ -1,73 +1,77 @@
 package com.alevel.java.todolist.service;
 
 import com.alevel.java.todolist.entity.TodoList;
-import com.alevel.java.todolist.entity.changereq.ChangeRequest;
+import com.alevel.java.todolist.entity.TodoStatus;
+import com.alevel.java.todolist.entity.request.SaveTodoRequest;
 import com.alevel.java.todolist.exception.TodoNotFoundException;
+import com.alevel.java.todolist.exception.UserNotFoundException;
 import com.alevel.java.todolist.repository.TodoListRepository;
+import com.alevel.java.todolist.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 @Service
 @Transactional
 public class TodoListListService implements TodoListOperations {
 
-    private final TodoListRepository repository;
+    private final TodoListRepository todoListRepository;
 
-    public TodoListListService(TodoListRepository repository) {
-        this.repository = repository;
+    private final UserRepository userRepository;
+
+    public TodoListListService(TodoListRepository todoListRepository, UserRepository userRepository) {
+        this.todoListRepository = todoListRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
-    public TodoList create(ChangeRequest request) {
+    public TodoList create(Integer userId, SaveTodoRequest request) {
+        var user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
         var todo = new TodoList();
+        todo.setUser(user);
         todo.setText(request.getText());
         todo.setStatus(request.getStatus());
-        return repository.save(todo);
+
+        user.getTodos().add(todo);
+
+        return todoListRepository.save(todo);
     }
 
     @Override
-    public void changeStatus(Long id) {
-        var todo = repository.findById(id)
+    public void update(UUID id, SaveTodoRequest request) {
+        var existingTodo = getById(id);
+        existingTodo.setStatus(request.getStatus());
+        existingTodo.setText(request.getText());
+        todoListRepository.save(existingTodo);
+    }
+
+    @Override
+    public void updateStatus(UUID id, TodoStatus status) {
+        var existingTodo = getById(id);
+        existingTodo.setStatus(status);
+        todoListRepository.save(existingTodo);
+    }
+
+    @Override
+    public TodoList getById(UUID id) {
+        return todoListRepository.findById(id)
                 .orElseThrow(() -> new TodoNotFoundException(id));
-        todo.setStatus(true);
     }
 
     @Override
-    public List<TodoList> getAllNotDone() {
-        return repository.findAll()
-                .stream()
-                .filter((task) -> task.getStatus().equals(false))
-                .collect(Collectors.toList());
+    public void deleteById(UUID id) {
+        todoListRepository.findById(id);
     }
 
     @Override
-    public List<TodoList> getAllTodo() {
-        return repository.findAll();
-    }
-
-    @Override
-    public Optional<TodoList> getById(Long id) {
-        return repository.findById(id);
-    }
-
-    @Override
-    public void update(Long id, ChangeRequest request) {
-        var todo = repository.findById(id)
-                .orElseThrow(() -> new TodoNotFoundException(id));
-        todo.setText(request.getText());
-        todo.setStatus(request.getStatus());
-        repository.save(todo);
-    }
-
-    @Override
-    public Optional<TodoList> deleteById(Long id) {
-        var todo = repository.findById(id);
-        todo.ifPresent(repository::delete);
-        return todo;
+    public List<TodoList> getAllByUserIdAndStatus(Integer userId, TodoStatus status) {
+        if (!userRepository.existsById(userId)) {
+            throw new UserNotFoundException(userId);
+        }
+        return todoListRepository.findAllByUser_IdAndStatus(userId, status);
     }
 
 }

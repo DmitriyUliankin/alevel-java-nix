@@ -1,17 +1,16 @@
 package com.alevel.java.todolist.controller;
 
-import com.alevel.java.todolist.entity.TodoList;
-import com.alevel.java.todolist.entity.changereq.ChangeRequest;
-import com.alevel.java.todolist.exception.TodoNotFoundException;
+import com.alevel.java.todolist.entity.request.SaveTodoRequest;
+import com.alevel.java.todolist.entity.request.SetTodoStatusRequest;
+import com.alevel.java.todolist.entity.response.TodoResponse;
 import com.alevel.java.todolist.service.TodoListOperations;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/todo-list")
+@RequestMapping("/todos")
 public class TodoListController {
 
     private final TodoListOperations todoListOperations;
@@ -21,39 +20,27 @@ public class TodoListController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TodoList> getById(@PathVariable Long id) {
-        return todoListOperations.getById(id)
-                .map(ResponseEntity::ok)
-                .orElseThrow(() -> new TodoNotFoundException(id));
+    public TodoResponse getById(@PathVariable UUID id) {
+        var todo = todoListOperations.getById(id);
+        return TodoResponse.fromTodo(todo);
     }
 
-    @GetMapping(path = "/all")
-    public List<TodoList> getAll() {
-        return todoListOperations.getAllTodo();
-    }
-
-    @GetMapping(path = "/uncompleted")
-    public List<TodoList> getAllNotDone() {
-        return todoListOperations.getAllNotDone();
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public TodoList create(@RequestBody ChangeRequest request) {
-        return todoListOperations.create(request);
-    }
-
-    @DeleteMapping("/{id}")
-    public TodoList deleteById(@PathVariable Long id) {
-        return todoListOperations.deleteById(id)
-                .orElseThrow(() -> new TodoNotFoundException(id));
-    }
-
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    public void update(@PathVariable Long id, @RequestBody ChangeRequest request) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@PathVariable UUID id, @RequestBody SaveTodoRequest request) {
         todoListOperations.update(id, request);
     }
 
+    @PatchMapping("/{id}/status")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateStatus(@PathVariable UUID id, @RequestBody SetTodoStatusRequest request) {
+        todoListOperations.updateStatus(id, request.getStatus());
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable UUID id) {
+        todoListOperations.deleteById(id);
+    }
 
 }

@@ -1,25 +1,24 @@
 package com.alevel.java.todolist.service;
 
 import com.alevel.java.todolist.entity.TodoList;
-import com.alevel.java.todolist.entity.changereq.ChangeRequest;
+import com.alevel.java.todolist.entity.TodoStatus;
+import com.alevel.java.todolist.entity.request.SaveTodoRequest;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
 public interface TodoListOperations {
 
-    TodoList create(ChangeRequest request);
+    TodoList create(Integer userId, SaveTodoRequest request);
 
-    void changeStatus(Long id);
+    void update(UUID id, SaveTodoRequest request);
 
-    List<TodoList> getAllNotDone();
+    void updateStatus(UUID id, TodoStatus status);
 
-    List<TodoList> getAllTodo();
+    TodoList getById(UUID id);
 
-    Optional<TodoList> getById(Long id);
+    void deleteById(UUID id);
 
-    void update(Long id, ChangeRequest request);
-
-    Optional<TodoList> deleteById(Long id);
+    List<TodoList> getAllByUserIdAndStatus(Integer userId, TodoStatus status);
 
 }
